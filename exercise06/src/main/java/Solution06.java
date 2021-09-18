@@ -9,31 +9,38 @@ import java.util.Scanner;
 
 public class Solution06 {
     /*
-    * *Create a program
-    * Initialize scanner 'currAgeInput' = new Scanner(system.in) for current age
-    * Initialize scanner 'retAgeInput' = new Scanner(system.in) for retired age
+    * Create a program
+    * make constant scanner
+    * make 'inputMethod' method for scanning input
+    * integer function method for calculating 'yearsLeft'
     * print "What is your current age? "
-    * declare integer variable 'currAge' = using 'currAgeInput' scanner
+    * declare integer variable 'currAge' = using scanner 'inputMethod'
     * print "At what age would you like to retire? "
-    * declare integer variable 'retAge' = using 'retAgeInput' scanner
-    * declare integer variable 'yearsLeft' = 'retAge' - 'currAge'
+    * declare integer variable 'retAge' = using scanner 'inputMethod'
+    * declare integer variable 'yearsLeft' = 'calcYearsLeft' method
     * print "You have 'yearsLeft' years left until you can retire."
     * declare a Year variable 'currYear' = Year.now function for current year
     * declare a Year variable 'retYear' = currYear.plusYears('yearsLeft') to get retirement year
       add years left plus current year for retired year
     * print "It's 'cureYear', so you can retire in 'retYear'."
     */
+    private static final Scanner input = new Scanner(System.in);
+
+    private int inputMethod(String prompt){
+        System.out.println(prompt);
+        return input.nextInt();
+    }
+    int calcYearsLeft(int retire, int current){
+        return retire - current;
+    }
+
     public static void main(String[] args) {
-        Scanner currAgeInput = new Scanner(System.in);
-        Scanner retAgeInput = new Scanner(System.in);
+        Solution06 app = new Solution06();
 
-        System.out.println("What is your current age? ");
-        int currAge = currAgeInput.nextInt();
+        int currAge = app.inputMethod("What is your current age? ");
+        int retAge = app.inputMethod("At what age would you like to retire? ");
 
-        System.out.println("At what age would you like to retire? ");
-        int retAge = retAgeInput.nextInt();
-
-        int yearsLeft = retAge - currAge;
+        int yearsLeft = app.calcYearsLeft(retAge, currAge);
         System.out.println("You have " +yearsLeft+ " years left until you can retire.");
 
         Year currYear = Year.now();

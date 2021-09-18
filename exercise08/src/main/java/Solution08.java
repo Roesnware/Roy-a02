@@ -7,39 +7,46 @@ import java.util.Scanner;
 
 public class Solution08 {
     /*
-     * Scanner 'peopleInput' = new Scanner to scan number of people eating pizza input
-     * Scanner 'pizzaInput' = new Scanner to scan number of pizzas input
-     * Scanner 'sliceInput' = new Scanner to scan number of slices each pizza has input
+     * declare constant scanner for input
+     * make private method for 'inputMethod' scanning input
+     * declare application variable 'app'
+     * declare int method 'calcLeftovers' return 'numSlices' % 'numPeople' using mod for remainder
+     * declare int method 'calcSlicePerPerson' return 'numSlices' / 'numPeople' using division
      * print 'How many people?'
-     * declare integer variable 'numPeople' = scan in # people using 'peopleInput' scanner
+     * declare integer variable 'numPeople' = scan in # people using scanner method
      * print 'How many pizzas do you have?'
-     * declare integer variable 'numPizzas' = scan in # pizzas using 'pizzaInput' scanner
+     * declare integer variable 'numPizzas' = scan in # pizzas using scanner method
      * print 'How many slices per pizza?'
-     * declare integer variable 'numSlicesEach' = scan in # slices per pizza using 'slicePerPizzaInput' scanner
+     * declare integer variable 'numSlicesEach' = scan in # slices per pizza using scanner method
      * declare integer variable 'numSlices' = 'numSlicesEach' * 'numPizzas'
-     * declare integer variable 'slicePerPerson' = 'numSlices' / 'numPeople' using division
-     * declare integer variable 'leftovers' = 'numSlices' % 'numPeople' using mod for remainder
+     * declare integer variable 'slicePerPerson' = using 'calcSlicePerPerson' function
+     * declare integer variable 'leftovers' = using 'calcLeftovers' function
      * print ''numPeople' people with 'numPizzas' pizzas ('numSlices' slices)'
      * print 'Each person gets 'slicePerPerson' pieces of pizza.'
      * print 'There are 'leftovers' leftover pieces.'
      */
+    private static final Scanner input = new Scanner(System.in);
+
+    private int inputMethod(String prompt){
+        System.out.println(prompt);
+        return input.nextInt();
+    }
+    int calcLeftovers(int numSlices, int numPeople){
+        return (numSlices)%(numPeople);
+    }
+    int calcSlicePerPerson(int numSlices, int numPeople){
+        return (numSlices)/(numPeople);
+    }
     public static void main(String[] args) {
-        Scanner peopleInput = new Scanner(System.in);
-        Scanner pizzaInput = new Scanner(System.in);
-        Scanner slicePerPizzaInput = new Scanner(System.in);
+        Solution08 app = new Solution08();
 
-        System.out.print("How many people? ");
-        int numPeople = peopleInput.nextInt();
-
-        System.out.print("How many pizzas do you have? ");
-        int numPizzas = pizzaInput.nextInt();
-
-        System.out.print("How many slices per pizza? ");
-        int numSlicesEach = slicePerPizzaInput.nextInt();
+        int numPeople = app.inputMethod("How many people? ");
+        int numPizzas = app.inputMethod("How many pizzas do you have? ");
+        int numSlicesEach = app.inputMethod("How many slices per pizza? ");
         int numSlices = (numSlicesEach * numPizzas);
 
-        int slicePerPerson = (numSlices)/(numPeople);
-        int leftovers = (numSlices)%(numPeople);
+        int slicePerPerson = app.calcSlicePerPerson(numSlices, numPeople);
+        int leftovers = app.calcLeftovers(numSlices, numPeople);
 
         System.out.printf("%d people with %d pizzas (%d slices)", numPeople, numPizzas, numSlices);
         System.out.printf("Each person gets %d pieces of pizza.", slicePerPerson);
